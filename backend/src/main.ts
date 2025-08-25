@@ -1,5 +1,7 @@
 import { NestFactory } from "@nestjs/core"
 import { ValidationPipe } from "@nestjs/common"
+import helmet from "helmet"
+import * as compression from "compression"
 import { AppModule } from "./app.module"
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
@@ -12,8 +14,10 @@ async function bootstrap() {
 
   // Enable CORS for frontend
   app.enableCors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    origin: [process.env.FRONTEND_URL || "http://localhost:3000"],
     credentials: true,
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 
   // Global validation pipe
@@ -24,6 +28,10 @@ async function bootstrap() {
       transform: true,
     }),
   )
+
+  // Security and performance middleware
+  app.use(helmet())
+  app.use(compression())
 
   const config = new DocumentBuilder()
     .setTitle('Web3 Task Manager API')

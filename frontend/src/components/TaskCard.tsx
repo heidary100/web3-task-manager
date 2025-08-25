@@ -7,7 +7,7 @@ import { Badge } from "./ui/badge"
 import { useUpdateTask, useDeleteTask } from "../hooks/useTasks"
 import { EditTaskDialog } from "./EditTaskDialog"
 import { Clock, CheckCircle, AlertCircle, MoreHorizontal, Edit, Trash2, Calendar } from "lucide-react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu.tsx"
 
 interface Task {
   id: number
@@ -99,7 +99,7 @@ export function TaskCard({ task, isSelected, onSelect }: TaskCardProps) {
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                  <Button className="h-8 w-8 p-0">
                     <MoreHorizontal className="w-4 h-4" />
                   </Button>
                 </DropdownMenuTrigger>

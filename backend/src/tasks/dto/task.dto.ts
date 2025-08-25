@@ -18,7 +18,7 @@ export class UpdateTaskDto {
   @IsOptional()
   description?: string
 
-  @IsIn(["pending", "processed", "failed"])
+  @IsIn(["PENDING", "PROCESSED", "FAILED"])
   @IsOptional()
   status?: string
 }

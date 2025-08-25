@@ -80,7 +80,7 @@ export function CreateTaskDialog({ open, onOpenChange }: CreateTaskDialogProps) 
           </div>
 
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={handleClose}>
+            <Button type="button" onClick={handleClose}>
               Cancel
             </Button>
             <Button type="submit" disabled={!title.trim() || createTask.isLoading}>

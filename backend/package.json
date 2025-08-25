@@ -33,7 +33,9 @@
     "bull": "^4.16.5",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "compression": "^1.8.1",
     "ethers": "^6.8.1",
+    "helmet": "^7.2.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "prisma": "^5.7.0",
@@ -77,9 +79,25 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "**/*.ts",
+      "!**/*.spec.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "src/main.ts$",
+      "src/.*/.*\\.module\\.ts$",
+      "src/auth/jwt.strategy.ts$",
+      "src/common/prisma/prisma.module.ts$"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    }
   }
 }

@@ -44,7 +44,7 @@ export class TaskProcessor {
       // Update task status to processed
       await this.prisma.task.update({
         where: { id: taskId },
-        data: { status: "processed" },
+        data: { status: "PROCESSED" },
       })
 
       await job.progress(80)
@@ -68,7 +68,7 @@ export class TaskProcessor {
       // Update task status to failed
       await this.prisma.task.update({
         where: { id: taskId },
-        data: { status: "failed" },
+        data: { status: "FAILED" },
       })
 
       // Create error log
@@ -103,7 +103,7 @@ export class TaskProcessor {
           // Update task status
           await this.prisma.task.update({
             where: { id: taskId },
-            data: { status: "processed" },
+            data: { status: "PROCESSED" },
           })
 
           // Log the action
@@ -121,7 +121,7 @@ export class TaskProcessor {
 
           await this.prisma.task.update({
             where: { id: taskId },
-            data: { status: "failed" },
+            data: { status: "FAILED" },
           })
 
           await this.prisma.taskLog.create({
@@ -157,7 +157,7 @@ export class TaskProcessor {
       // Find old completed tasks
       const oldTasks = await this.prisma.task.findMany({
         where: {
-          status: "processed",
+          status: "PROCESSED",
           updatedAt: {
             lt: cutoffDate,
           },

@@ -16,7 +16,7 @@ export class TasksService {
       data: {
         ...createTaskDto,
         userId,
-        status: "pending",
+        status: "PENDING",
       },
     })
 
@@ -91,7 +91,11 @@ export class TasksService {
 
     const updatedTask = await this.prisma.task.update({
       where: { id },
-      data: updateTaskDto,
+      data: {
+        ...(updateTaskDto.title ? { title: updateTaskDto.title } : {}),
+        ...(updateTaskDto.description ? { description: updateTaskDto.description } : {}),
+        ...(updateTaskDto.status ? { status: updateTaskDto.status as any } : {}),
+      },
     })
 
     // Log task update
@@ -138,7 +142,7 @@ export class TasksService {
           data: {
             ...data,
             userId,
-            status: "pending",
+            status: "PENDING",
           },
         }),
       ),
